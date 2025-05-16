@@ -20,7 +20,7 @@ export async function compress(inputDir, outputPath = null) {
             const output = fs.createWriteStream(outputPath);
             const archive = archiver('zip', { zlib: { level: 9 } });
             archive.pipe(output);
-            archive.directory(inputDir, false);
+            archive.directory(inputDir, inputDir);
             archive.finalize();
             output.on('close', res);
             archive.on('error', rej);

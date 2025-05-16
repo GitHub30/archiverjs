@@ -1,6 +1,6 @@
 {
   "name": "archiverjs",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Simple Node.js library for compressing and extracting .tar.gz, .zip, and .7z archives",
   "main": "index.mjs",
   "scripts": {
