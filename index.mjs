@@ -3,13 +3,14 @@ import path from 'path';
 import * as tar from 'tar';
 import archiver from 'archiver';
 import decompress from 'decompress-archive';
+import sevenBin from '7zip-bin';
 import Seven from 'node-7z';
 const { add, extractFull } = Seven;
 
-export async function compress(inputDir, outputPath=null) {
+export async function compress(inputDir, outputPath = null) {
     if (outputPath === null) {
         outputPath = inputDir + '.tar.gz'
-    } 
+    }
     const ext = path.extname(outputPath);
     if (ext === '.gz') {
         await tar.c({ gzip: true, file: outputPath }, [inputDir]);
@@ -24,7 +25,9 @@ export async function compress(inputDir, outputPath=null) {
             archive.on('error', rej);
         });
     } else if (ext === '.7z') {
-        await add(outputPath, inputDir);
+        await add(outputPath, inputDir, {
+            $bin: sevenBin.path7za,
+        });
     } else {
         throw new Error(`Unsupported format ${ext}`);
     }
@@ -42,7 +45,9 @@ export async function extract(archivePath, destDir = '.') {
             });
         });
     } else if (ext === '.7z') {
-        await extractFull(archivePath, destDir);
+        await extractFull(archivePath, destDir, {
+            $bin: sevenBin.path7za,
+        });
     } else {
         throw new Error(`Unsupported format ${ext}`);
     }
