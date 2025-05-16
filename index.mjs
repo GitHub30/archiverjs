@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import tar from 'tar';
+import * as tar from 'tar';
 import archiver from 'archiver';
 import decompress from 'decompress-archive';
-import { add, extractFull } from 'node-7z';
+import Seven from 'node-7z';
+const { add, extractFull } = Seven;
 
 export async function compress(inputDir, outputPath) {
     const ext = path.extname(outputPath);
