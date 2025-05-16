@@ -1,5 +1,3 @@
-Here’s a complete English README.md draft for **archiverjs**, structured with common conventions and including a summary at the top.
-
 ## Summary
 
 ArchiverJS is a lightweight Node.js library for compressing and extracting directories with support for `.tar.gz`, `.zip`, and `.7z` formats, powered by a promise-based API for seamless async/await usage ([docs.npmjs.com][1]). It aims to simplify archive workflows in Node.js projects by providing a single, intuitive interface for multiple archive types ([Bits and Pieces][2]).
@@ -21,6 +19,7 @@ Import and use the `compress` and `extract` functions with async/await:
 ```js
 import { compress, extract } from 'archiverjs';
 
+await compress('mydir'); // create mydir.tar.gz
 await compress('mydir', 'mydir.tar.gz');
 await compress('mydir', 'mydir.zip');
 await compress('mydir', 'mydir.7z');
@@ -52,6 +51,14 @@ Extracts the given archive (`archivePath`) into `destDir` (defaults to current d
 
 Contributions, bug reports, and feature requests are welcome via GitHub pull requests or issues:
 [https://github.com/GitHub30/archiverjs/issues](https://github.com/GitHub30/archiverjs/issues) ([Bits and Pieces][2]).
+
+## Deployment
+
+Open GitHub Codespaces
+```bash
+npm adduser
+npm publish --access public
+```
 
 ## License
 
