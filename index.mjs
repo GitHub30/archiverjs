@@ -6,9 +6,12 @@ import decompress from 'decompress-archive';
 import Seven from 'node-7z';
 const { add, extractFull } = Seven;
 
-export async function compress(inputDir, outputPath) {
+export async function compress(inputDir, outputPath=null) {
+    if (outputPath === null) {
+        outputPath = inputDir + '.tar.gz'
+    } 
     const ext = path.extname(outputPath);
-    if (ext === '.tar.gz') {
+    if (ext === '.gz') {
         await tar.c({ gzip: true, file: outputPath }, [inputDir]);
     } else if (ext === '.zip') {
         await new Promise((res, rej) => {
