@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { promises as fsp } from 'fs';
 import path from 'path';
 import * as tar from 'tar';
 import archiver from 'archiver';
@@ -25,6 +26,7 @@ export async function compress(inputDir, outputPath = null) {
             archive.on('error', rej);
         });
     } else if (ext === '.7z') {
+        await fsp.chmod(sevenBin.path7za, 0o755);
         await add(outputPath, inputDir, {
             $bin: sevenBin.path7za,
         });
@@ -45,6 +47,7 @@ export async function extract(archivePath, destDir = '.') {
             });
         });
     } else if (ext === '.7z') {
+        await fsp.chmod(sevenBin.path7za, 0o755);
         await extractFull(archivePath, destDir, {
             $bin: sevenBin.path7za,
         });
